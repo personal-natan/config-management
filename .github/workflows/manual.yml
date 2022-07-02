@@ -1,0 +1,14 @@
+name: Ansible Automation for the Python "venv"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deployAnsible:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./.github/actions/ansible
+      with: 
+        playbook: project-number-one.yml
+        inventory: localhost
