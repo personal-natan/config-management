@@ -8,10 +8,5 @@ jobs:
     runs-on: simalpi
 
     steps:
-      - uses: actions/checkout@v3
-
       - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: project-number-one.yml
-
+        run: ansible-playbook project-number-one.yml
