@@ -1,0 +1,7 @@
+---
+
+- name: Configuration Management of Python venv
+  hosts: localhost
+  user: root
+  roles:
+    - project-number-one
