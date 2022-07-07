@@ -17,4 +17,4 @@ jobs:
 
     steps:
       - name: Run playbook
-        run: ansible-playbook project-number-one.yml
+        run: ansible-playbook project-number-one.yml -i hosts
