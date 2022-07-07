@@ -1,2 +1,3 @@
 ---
-target: "/home/natannegara/ansible-python"
+target: "/opt/python-venv/"
+#target: "/home/natannegara/ansible-python"
