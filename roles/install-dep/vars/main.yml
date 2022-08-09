@@ -1,0 +1,8 @@
+---
+#target: "/opt/python-venv/"
+#target: "/home/natannegara/ansible-python"
+target: 
+  - path: "/home/natan/Documents/myproject/config-management/projectone"
+    file: "projectone.txt"
+  - path: "/home/natan/Documents/myproject/config-management/projecttwo"
+    file: "projecttwo.txt"

@@ -1,7 +1,0 @@
----
-- name: install venv in selected project
-  shell: cd {{ target }} && python3 -m venv venv 
-
-- name: Update venv
-  template: src=requirements.txt dest={{ target }}
-  notify: install & update requirement.txt

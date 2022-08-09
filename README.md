@@ -1,6 +1,6 @@
 HOW TO RUN THE SCRIPT
 
-1. Make sure ansible and python already installed in the server (e.g 192.168.10.10)
+1. Make sure ansible and python (apt install python3-pip python3.8-venv) already installed in the server (e.g 192.168.10.10)
 
 2. Install Github Action on the server (e.g 192.168.10.10) and give unique name (e.g "simalpi")
    Edit .github/workflows/config-management.yml
@@ -33,3 +33,10 @@ HOW TO RUN THE SCRIPT
    ```
 
 6. Make a new commit and the script will run automatically.
+
+==========================================================
+python3 -m venv $name (create a venv)
+source venv/bin/activate (activate venv)
+pip3 list (listing all dependencies)
+pip3 freeze > requirements.txt (export requirements file)
+deactivate (deactivate venv)

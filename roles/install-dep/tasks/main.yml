@@ -1,0 +1,29 @@
+---
+# - with_items: "{{ target }}"
+#   debug:
+#     msg: "{{ item.path }}"
+
+- name: check folder existing
+  with_items: "{{ target }}"
+  stat:
+    path: "{{ item.path }}"
+  register: path_stat
+
+# - loop: "{{ path_stat.results }}"
+#   debug:
+#     msg: "{{ item.item.path }}"
+
+- loop: "{{ path_stat.results }}"
+  file:
+    path: "{{ item.item.path }}"
+    state: directory
+  when: "{{ not item.stat.exists }}"
+
+- name: install venv in selected project
+  with_items: "{{ target }}"
+  shell: cd {{ item.path }} && python3 -m venv {{ item.file }}
+
+- name: Update venv
+  with_items: "{{ target }}"
+  template: src=requirements.txt dest={{ item.path }}
+  notify: install & update requirement.txt

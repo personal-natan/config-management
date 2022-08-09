@@ -1,6 +1,0 @@
----
-
-- name: install & update requirement.txt
-  shell: cd {{ target }} && source venv/bin/activate && pip3 install -r requirements.txt
-  args:
-    executable: /bin/bash
