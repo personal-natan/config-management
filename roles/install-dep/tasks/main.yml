@@ -13,7 +13,8 @@
 #   debug:
 #     msg: "{{ item.item.path }}"
 
-- loop: "{{ path_stat.results }}"
+- name: create folder target if it isnt exist
+  loop: "{{ path_stat.results }}"
   file:
     path: "{{ item.item.path }}"
     state: directory

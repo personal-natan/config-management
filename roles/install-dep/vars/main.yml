@@ -6,3 +6,5 @@ target:
     file: "projectone.txt"
   - path: "/home/natan/Documents/myproject/config-management/projecttwo"
     file: "projecttwo.txt"
+  - path: "/home/natan/Documents/myproject/config-management/projectthree"
+    file: "projectthree.txt"
