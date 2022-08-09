@@ -1,4 +1,4 @@
-name: sample
+name: pipeline-ansible
 on:
   push:
     branches:
