@@ -29,10 +29,10 @@ jobs:
         Write-Host "::set-output name=docs_changed::$HasDiff"
 
   # Run the job only with "docs_changed" equals "True"
-  conditional_job:
+  install_dependencies:
     runs-on: 'ubuntu-20.04'
     needs: [ conditional_job_check_files ]
     if: needs.conditional_job_check_files.outputs.docs_changed == 'True'
     steps:
-    - shell: pwsh
-      run: echo publish docs
+    - name: Run Playbook
+      run: ansible-playbook install-dep.yml
