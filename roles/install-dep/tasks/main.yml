@@ -21,7 +21,7 @@
 
 - name: install venv in selected project
   with_items: "{{ target }}"
-  shell: cd {{ item.path }} && python3 -m venv {{ item.file }}
+  shell: cd {{ item.path }} && python3 -m venv {{ item.file.split('.') | first }}
 
 - name: Update venv
   with_items: "{{ target }}"
