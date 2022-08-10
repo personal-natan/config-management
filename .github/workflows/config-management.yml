@@ -10,7 +10,8 @@ jobs:
   running-ansible-script:
     runs-on: 'ubuntu-20.04'
     env:
-      home: /home/runner/work/config-management/config-management
+      dest: roles/install-dep/templates/
+      src: .github/projects/templates/*
     steps:
     - name: Checkout to venv-project
       uses: actions/checkout@v2
@@ -21,8 +22,8 @@ jobs:
     
     - uses: actions/checkout@v3 
     - run: |
-        ls -alh
-        ls -alh .github/
+        cp $src $dest
+        ls $dest
       
 
     # - uses: .github/actions/venv-projects
