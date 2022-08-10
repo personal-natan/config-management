@@ -9,9 +9,9 @@ jobs:
   # Run the job only with "docs_changed" equals "True"
   running-ansible-script:
     runs-on: 'ubuntu-20.04'
-    env:
-      dest: roles/install-dep/templates/
-      src: venv-project/projects/templates/*
+    # env:
+    #   dest: roles/install-dep/templates/
+    #   src: venv-project/projects/templates/*
     steps:
     - name: Checkout to venv-project
       uses: actions/checkout@v2
@@ -20,13 +20,16 @@ jobs:
         path: .github/projects/templates
         token: ${{ secrets.REPO_TOKEN }}        
     
-    - run: mv .github venv-project
+    - run: |
+        echo "pull other repo"
+        ls -alh
+        mv .github venv-project
+        ls -alh venv-project
 
     - uses: actions/checkout@v3 
     - run: |
+        echo "pull main repo"
         ls -alh
-        echo "now check venv-project"
-        ls -alh venv-project
   
       
 
