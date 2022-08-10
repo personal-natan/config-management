@@ -19,9 +19,10 @@ jobs:
         path: .github/projects/templates
         token: ${{ secrets.REPO_TOKEN }}        
     
+    - uses: actions/checkout@v3 
     - run: |
-        # cp .github/projects/templates/* $home/roles/install-dep/templates
-        ls /home/runner/work/config-management/config-management
+        ls -alh
+        ls -alh .github/
       
 
     # - uses: .github/actions/venv-projects
