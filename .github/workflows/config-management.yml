@@ -29,19 +29,29 @@ jobs:
       dest: roles/install-dep/templates/
       # src: venv-project-artifact/*
     steps:
-    - uses: actions/checkout@v3 
     - uses: actions/download-artifact@v3
+      name: Download Artifact
       with:
         name: venv-project-artifact
         # path: ${{ runner.temp }}
         path: ${{ env.GITHUB_WORKFLOW }}
+
+    - uses: andstor/copycat-action@v3
+      name: Copy artifact to ansible repo
+      with:
+        personal_token: ${{ secrets.REPO_TOKEN }}
+        src_path: templates/projects/
+        dst_path: roles/install-dep/templates/
+        dst_owner: Natannegara
+        dst_repo_name: config-management
+
+    - uses: actions/checkout@v3 
+      name: pull ansible repo
+
     - run: |
         echo "pull main repo"
-        whoami
-        chmod 666 roles/ templates/
         ls -alh
-        cp templates/* $dest
-        ls roles/install-dep/templates
+        ls -alh roles/install-dep/templates/
   
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
