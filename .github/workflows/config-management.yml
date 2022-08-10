@@ -32,7 +32,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: venv-project-artifact
-        path: /
+        path: /templates
     - uses: actions/checkout@v3 
     - run: |
         echo "pull main repo"
