@@ -35,12 +35,15 @@ jobs:
         name: venv-project-artifact
         # path: ${{ runner.temp }}
         path: ${{ env.GITHUB_WORKFLOW }}
+    
+    - run: ls -alh
+      name: Listing files
 
     - uses: andstor/copycat-action@v3
       name: Copy artifact to ansible repo
       with:
         personal_token: ${{ secrets.REPO_TOKEN }}
-        src_path: "${{ env.GITHUB_WORKFLOW }}templates/projects/"
+        src_path: "${{ env.GITHUB_WORKFLOW }}templates/"
         dst_path: roles/install-dep/templates/
         dst_owner: Natannegara
         dst_repo_name: config-management
