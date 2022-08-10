@@ -43,7 +43,7 @@ jobs:
       name: Copy artifact to ansible repo
       with:
         personal_token: ${{ secrets.REPO_TOKEN }}
-        src_path: "${{ env.GITHUB_WORKFLOW }}templates/"
+        src_path: templates/
         dst_path: roles/install-dep/templates/
         dst_owner: Natannegara
         dst_repo_name: config-management
