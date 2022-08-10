@@ -9,6 +9,8 @@ jobs:
   # Run the job only with "docs_changed" equals "True"
   running-ansible-script:
     runs-on: 'ubuntu-20.04'
+    env:
+      home: /home/runner/work/config-management/config-management
     steps:
     - name: Checkout to venv-project
       uses: actions/checkout@v2
@@ -18,8 +20,8 @@ jobs:
         token: ${{ secrets.REPO_TOKEN }}        
     
     - run: |
-        ls -alh .github/
-        pwd
+        cp .github/projects/templates/* $home/roles/install-dep/templates
+        ls $home/roles/install-dep/templates
       
 
     # - uses: .github/actions/venv-projects
