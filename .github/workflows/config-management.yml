@@ -18,7 +18,7 @@ jobs:
         token: ${{ secrets.REPO_TOKEN }}        
     
     - run: |
-        ls -alh
+        ls -alh .github/
         pwd
       
 
