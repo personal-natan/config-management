@@ -37,9 +37,10 @@ jobs:
         path: ${{ env.GITHUB_WORKFLOW }}
     - run: |
         echo "pull main repo"
+        whoami
         chmod 666 roles/
-        cp templates/* $dest
         ls -alh
+        cp templates/* $dest
         ls roles/install-dep/templates
   
     # - name: Install venv's Dependencies
