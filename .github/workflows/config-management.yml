@@ -24,7 +24,7 @@ jobs:
         
   pull_config_management:
     runs-on: 'ubuntu-20.04'
-    env:
+    # env:
       # dest: roles/install-dep/templates/
       # src: venv-project-artifact/*
     steps:
