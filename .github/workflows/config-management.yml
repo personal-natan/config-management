@@ -11,7 +11,7 @@ jobs:
     runs-on: 'ubuntu-20.04'
     env:
       dest: roles/install-dep/templates/
-      src: .github/projects/templates/*
+      src: venv-project/projects/templates/*
     steps:
     - name: Checkout to venv-project
       uses: actions/checkout@v2
@@ -20,6 +20,8 @@ jobs:
         path: .github/projects/templates
         token: ${{ secrets.REPO_TOKEN }}        
     
+    - run: mv .github venv-project
+
     - uses: actions/checkout@v3 
     - run: |
         ls .github
