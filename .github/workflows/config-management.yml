@@ -37,10 +37,8 @@ jobs:
         path: ${{ env.GITHUB_WORKFLOW }}
     - run: |
         echo "pull main repo"
-        pwd
+        chmod 644 roles/
         ls -alh
-        cp templates/projects/templates/* $dest
-        ls -alh roles/install-dep/templates/
   
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
