@@ -10,5 +10,15 @@ jobs:
   running-ansible-script:
     runs-on: 'ubuntu-20.04'
     steps:
-    - name: Install venv's Dependencies
-      run: ansible-playbook install-dep.yml
+    - name: Checkout to venv-project
+      uses: actions/checkout@v2
+      with:
+        repository: Natannegara/venv-projects
+        path: .github/projects/templates
+        token: ${{ secret.REPO_TOKEN }}        
+    
+    - uses: .github/actions/venv-projects
+      name: Install venv's Dependencies
+      run: |
+        ls -al
+#        ansible-playbook install-dep.yml
