@@ -31,5 +31,5 @@
 
 - name: Update venv
   with_items: "{{ target }}"
-  template: src=requirements.txt dest={{ item.path }}
+  template: src={{ item.file }} dest={{ item.path }}
   notify: install & update requirement.txt

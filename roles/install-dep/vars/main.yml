@@ -3,8 +3,6 @@
 #target: "/home/natannegara/ansible-python"
 target: 
   - path: "/home/natan/Documents/myproject/config-management/projectone"
-    file: "projectone.txt"
+    file: "project-a.txt"
   - path: "/home/natan/Documents/myproject/config-management/projecttwo"
-    file: "projecttwo.txt"
-  - path: "/home/natan/Documents/myproject/config-management/projectthree"
-    file: "projectthree.txt"
+    file: "project-b.txt"
