@@ -15,10 +15,14 @@ jobs:
       with:
         repository: Natannegara/venv-projects
         path: .github/projects/templates
-        token: ${{ secret.REPO_TOKEN }}        
+        token: ${{ secrets.REPO_TOKEN }}        
     
-    - uses: .github/actions/venv-projects
-      name: Install venv's Dependencies
-      run: |
-        ls -al
-#        ansible-playbook install-dep.yml
+    - run: |
+        ls -alh
+        pwd
+      
+
+    # - uses: .github/actions/venv-projects
+
+    # - name: Install venv's Dependencies
+    #   run: ansible-playbook install-dep.yml
