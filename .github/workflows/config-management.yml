@@ -26,7 +26,7 @@ jobs:
     runs-on: 'ubuntu-20.04'
     needs: [ pull_venv_project ]
     env:
-      dest: roles/install-dep/templates/
+      dest: /home/runner/work/config-management/config-management/roles/install-dep/templates/
       # src: venv-project-artifact/*
     steps:
     - uses: actions/checkout@v3 
