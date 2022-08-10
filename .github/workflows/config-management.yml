@@ -7,10 +7,8 @@ on:
 
 jobs:
   # Run the job only with "docs_changed" equals "True"
-  install_dependencies:
+  running-ansible-script:
     runs-on: 'ubuntu-20.04'
-    needs: [ checking_template_update ]
-    if: needs.checking_template_update.outputs.docs_changed == 'True'
     steps:
-    - name: Run Playbook
+    - name: Install venv's Dependencies
       run: ansible-playbook install-dep.yml
