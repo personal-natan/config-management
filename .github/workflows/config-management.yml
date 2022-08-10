@@ -33,7 +33,7 @@ jobs:
       with:
         name: venv-project-artifact
         # path: ${{ runner.temp }}
-        path: ${{ runner }}
+        path: /home/runner/work
     - uses: actions/checkout@v3 
     - run: |
         echo "pull main repo"
