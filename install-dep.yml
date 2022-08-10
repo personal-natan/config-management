@@ -1,6 +1,7 @@
 ---
 
 - name: Configuration Management of Python venv
+  #hosts: controller
   hosts: localhost
   user: root
   roles:
