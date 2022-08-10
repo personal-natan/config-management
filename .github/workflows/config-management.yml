@@ -24,9 +24,10 @@ jobs:
 
     - uses: actions/checkout@v3 
     - run: |
-        ls .github
-        cp $src $dest
-        ls $dest
+        ls -alh
+        echo "now check venv-project"
+        ls -alh venv-project
+  
       
 
     # - uses: .github/actions/venv-projects
