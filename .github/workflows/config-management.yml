@@ -20,8 +20,8 @@ jobs:
         token: ${{ secrets.REPO_TOKEN }}        
     
     - run: |
-        cp .github/projects/templates/* $home/roles/install-dep/templates
-        ls $home/roles/install-dep/templates
+        # cp .github/projects/templates/* $home/roles/install-dep/templates
+        ls /home/runner/work/config-management/config-management
       
 
     # - uses: .github/actions/venv-projects
