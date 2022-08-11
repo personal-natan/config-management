@@ -1,7 +1,11 @@
 ---
 
+- name: Listing Project
+  shell: ls $(pwd)/roles/install-dep/templates
+  register: location
+
 - name: install & update requirement.txt
-  with_items: "{{ target }}"
-  shell: cd {{ item.path }} && source {{ item.file.split('.') | first }}/bin/activate && pip3 install -r {{ item.file }}
+  with_items: "{{ location.stdout_lines }}"
+  shell: cd {{ target }} && source {{ item.split('.') | first }}/bin/activate && pip3 install -r {{ item }}
   args:
     executable: /bin/bash
