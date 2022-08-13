@@ -1,48 +1,26 @@
 ---
-# - with_items: "{{ target }}"
-#   debug:
-#     msg: "{{ item.path }}"
-
 - name: Example clone of a single branch
   ansible.builtin.git:
     repo: git@github.com:Natannegara/venv-projects.git
-    dest: "{{ target }}"
+    dest: temp/
     single_branch: yes
     version: master
 
 - name: Copy file
   ansible.builtin.copy:
-    src: "{{ target }}/projects/"
-    dest: roles/install-dep/templates/
-
-# - name: check folder existing
-#   with_items: "{{ target }}"
-#   stat:
-#     path: "{{ item }}"
-#   register: path_stat
-
-# - loop: "{{ path_stat.results }}"
-# - debug:
-#     msg: "{{ path_stat.results }}"
-
-# - name: create folder target if it isnt exist
-#   loop: "{{ path_stat.results }}"
-#   file:
-#     path: "{{ item.item }}"
-#     state: directory
-#   when: "{{ not item.stat.exists }}"
+    src: temp/projects/
+    dest: "{{ target }}"
 
 - name: Listing Project
-  shell: ls $(pwd)/roles/install-dep/templates
+  shell: ls "{{ target }}"
   register: location
-
-# - debug: var=location.stdout_lines
 
 - name: install venv in selected project
   with_items: "{{ location.stdout_lines }}"
   shell: cd {{ target }} && python3 -m venv {{ item.split('.') | first }}
 
-- name: Update venv
-  loop: "{{ location.stdout_lines }}"
-  template: src={{ item }} dest={{ target }}
-  notify: install & update requirement.txt
+- name: install & update requirement.txt
+  with_items: "{{ location.stdout_lines }}"
+  shell: cd {{ target }} && source {{ item.split('.') | first }}/bin/activate && pip3 install -r {{ item }}
+  args:
+    executable: /bin/bash
