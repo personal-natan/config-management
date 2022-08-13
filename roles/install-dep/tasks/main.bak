@@ -1,0 +1,36 @@
+---
+# - with_items: "{{ target }}"
+#   debug:
+#     msg: "{{ item.path }}"
+    
+- name: check folder existing
+  with_items: "{{ target }}"
+  stat:
+    path: "{{ item }}"
+  register: path_stat
+
+# - loop: "{{ path_stat.results }}"
+# - debug:
+#     msg: "{{ path_stat.results }}"
+
+- name: create folder target if it isnt exist
+  loop: "{{ path_stat.results }}"
+  file:
+    path: "{{ item.item }}"
+    state: directory
+  when: "{{ not item.stat.exists }}"
+
+- name: Listing Project
+  shell: ls $(pwd)/roles/install-dep/templates
+  register: location
+
+# - debug: var=location.stdout_lines
+
+- name: install venv in selected project
+  with_items: "{{ location.stdout_lines }}"
+  shell: cd {{ target }} && python3 -m venv {{ item.split('.') | first }}
+
+- name: Update venv
+  loop: "{{ location.stdout_lines }}"
+  template: src={{ item }} dest={{ target }}
+  notify: install & update requirement.txt

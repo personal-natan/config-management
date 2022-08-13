@@ -2,23 +2,35 @@
 # - with_items: "{{ target }}"
 #   debug:
 #     msg: "{{ item.path }}"
-    
-- name: check folder existing
-  with_items: "{{ target }}"
-  stat:
-    path: "{{ item }}"
-  register: path_stat
+
+- name: Example clone of a single branch
+  ansible.builtin.git:
+    repo: git@github.com:Natannegara/venv-projects.git
+    dest: "{{ target }}"
+    single_branch: yes
+    version: master
+
+- name: Copy file
+  ansible.builtin.copy:
+    src: "{{ target }}/projects/"
+    dest: roles/install-dep/templates/
+
+# - name: check folder existing
+#   with_items: "{{ target }}"
+#   stat:
+#     path: "{{ item }}"
+#   register: path_stat
 
 # - loop: "{{ path_stat.results }}"
 # - debug:
 #     msg: "{{ path_stat.results }}"
 
-- name: create folder target if it isnt exist
-  loop: "{{ path_stat.results }}"
-  file:
-    path: "{{ item.item }}"
-    state: directory
-  when: "{{ not item.stat.exists }}"
+# - name: create folder target if it isnt exist
+#   loop: "{{ path_stat.results }}"
+#   file:
+#     path: "{{ item.item }}"
+#     state: directory
+#   when: "{{ not item.stat.exists }}"
 
 - name: Listing Project
   shell: ls $(pwd)/roles/install-dep/templates
