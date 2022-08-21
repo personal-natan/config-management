@@ -2,13 +2,13 @@
 - name: Example clone of a single branch
   ansible.builtin.git:
     repo: git@github.com:Natannegara/venv-projects.git
-    dest: temp/
+    dest: sample-dir/
     single_branch: yes
     version: master
 
 - name: Copy file
   ansible.builtin.copy:
-    src: temp/projects/
+    src: sample-dir/projects/
     dest: "{{ target }}"
 
 - name: Listing Project
