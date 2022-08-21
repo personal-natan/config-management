@@ -33,8 +33,8 @@ jobs:
     #   name: Download Artifact
     #   with:
     #     name: venv-project-artifact
-        # path: ${{ runner.temp }}
-        # path: ${{ env.GITHUB_WORKFLOW }}
+    #     path: ${{ runner.temp }}
+    #     path: ${{ env.GITHUB_WORKFLOW }}
 
     - uses: actions/checkout@v3 
       name: pull ansible repo

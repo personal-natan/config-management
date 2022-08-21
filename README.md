@@ -40,3 +40,4 @@ source venv/bin/activate (activate venv)
 pip3 list (listing all dependencies)
 pip3 freeze > requirements.txt (export requirements file)
 deactivate (deactivate venv)
+===
