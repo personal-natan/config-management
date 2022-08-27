@@ -1,7 +1,7 @@
 ---
 - name: Example clone of a single branch
   ansible.builtin.git:
-    repo: git@github.com:Natannegara/venv-projects.git
+    repo: git@github.com:personal-natan/venv-projects.git
     dest: sample-dir/
     # single_branch: yes
     clone: yes
