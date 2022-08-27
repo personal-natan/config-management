@@ -39,5 +39,6 @@ python3 -m venv $name (create a venv)
 source venv/bin/activate (activate venv)
 pip3 list (listing all dependencies)
 pip3 freeze > requirements.txt (export requirements file)
+pip3 install -r requirements.txt
 deactivate (deactivate venv)
 ===

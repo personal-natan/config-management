@@ -12,8 +12,9 @@
     src: sample-dir/projects/
     dest: "{{ target }}"
 
+# list files only
 - name: Listing Project
-  shell: ls "{{ target }}"
+  shell: ls -pr "{{ target }}" | grep -v /
   register: location
 
 - name: install venv in selected project
@@ -22,6 +23,6 @@
 
 - name: install & update requirement.txt
   with_items: "{{ location.stdout_lines }}"
-  shell: cd {{ target }} && source {{ item.split('.') | first }}/bin/activate && pip3 install -r {{ item }}
+  shell: cd {{ target }} && source {{ item.split('.') | first }}/bin/activate && pip install -r {{ item }}
   args:
     executable: /bin/bash
