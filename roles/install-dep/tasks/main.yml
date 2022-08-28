@@ -15,8 +15,8 @@
     
 - name: Copy file
   ansible.builtin.copy:
-    src: /home/ansible/sample-dir/projects/
-    remote_src: no
+    src: /home/ansible/sample-dir/projects
+    remote_src: yes
     dest: "{{ target }}"
 
 # list files only
