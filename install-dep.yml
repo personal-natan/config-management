@@ -2,6 +2,6 @@
 
 - name: Configuration Management of Python venv
   #hosts: controller
-  hosts: localhost
+  hosts: other
   roles:
     - install-dep
