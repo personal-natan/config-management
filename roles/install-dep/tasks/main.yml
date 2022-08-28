@@ -8,14 +8,14 @@
 - name: Example clone of a single branch
   ansible.builtin.git:
     repo: git@github.com:personal-natan/venv-projects.git
-    dest: home/ansible/sample-dir
+    dest: /home/ansible/sample-dir
     # single_branch: yes
     clone: yes
     version: master
     
 - name: Copy file
   ansible.builtin.copy:
-    src: home/ansible/sample-dir/projects/
+    src: /home/ansible/sample-dir/projects/
     dest: "{{ target }}"
 
 # list files only
