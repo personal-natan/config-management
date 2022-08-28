@@ -26,10 +26,10 @@
 
 - name: install venv in selected project
   with_items: "{{ location.stdout_lines }}"
-  shell: cd {{ target }} && python -m venv {{ item.split('.') | first }}
+  shell: cd "{{ target }}"/projects && python -m venv {{ item.split('.') | first }}
 
 - name: install & update requirement.txt
   with_items: "{{ location.stdout_lines }}"
-  shell: cd {{ target }} && source {{ item.split('.') | first }}/bin/activate && pip install -r {{ item }}
+  shell: cd "{{ target }}"/projects && source {{ item.split('.') | first }}/bin/activate && pip install -r {{ item }}
   args:
     executable: /bin/bash
