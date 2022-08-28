@@ -21,7 +21,7 @@
 
 # list files only
 - name: Listing Project
-  shell: ls -pr "{{ target }}" | grep -v /
+  shell: ls -pr "{{ target }}"/projects | grep -v /
   register: location
 
 - name: install venv in selected project
