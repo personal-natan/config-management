@@ -33,3 +33,6 @@
   shell: cd "{{ target }}"/projects && source {{ item.split('.') | first }}/bin/activate && pip install -r {{ item }}
   args:
     executable: /bin/bash
+
+- name: remove unused folder
+  shell: rm -rf /home/ansible/sample-dir
