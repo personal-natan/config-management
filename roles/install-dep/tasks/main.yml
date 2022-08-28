@@ -26,7 +26,7 @@
 
 - name: install venv in selected project
   with_items: "{{ location.stdout_lines }}"
-  shell: cd "{{ target }}"/projects && python -m venv {{ item.split('.') | first }}
+  shell: cd "{{ target }}"/projects && python3 -m venv {{ item.split('.') | first }}
 
 - name: install & update requirement.txt
   with_items: "{{ location.stdout_lines }}"
