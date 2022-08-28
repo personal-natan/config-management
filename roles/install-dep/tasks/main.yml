@@ -1,15 +1,21 @@
 ---
+
+# - name: "Set variables"
+#   set_fact:
+#     path_ansible: "/home/ansible/sample-dir"
+#     path_local: "/home/natan/sample-dir"
+    
 - name: Example clone of a single branch
   ansible.builtin.git:
     repo: git@github.com:personal-natan/venv-projects.git
-    dest: sample-dir/
+    dest: {{ path_clone }}
     # single_branch: yes
     clone: yes
     version: master
-
+    
 - name: Copy file
   ansible.builtin.copy:
-    src: sample-dir/projects/
+    src: {{ path_clone }}/projects/
     dest: "{{ target }}"
 
 # list files only
