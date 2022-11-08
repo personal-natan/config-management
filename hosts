@@ -1,6 +1,6 @@
 #https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories
 [other]
-192.168.100.50         ansible_user=ansible
+192.168.1.31         ansible_user=ansible
 
 [controller]
 localhost              ansible_connection=local 

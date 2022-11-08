@@ -75,4 +75,4 @@ jobs:
       run: ansible-playbook install-dep.yml
 
     - name: check result
-      run: ls /home/runner/work/projectone
+      run: ls /home/runner/projectone
