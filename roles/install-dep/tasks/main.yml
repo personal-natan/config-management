@@ -25,7 +25,7 @@
 - name: Listing Project
   # shell: ls -pr "{{ target }}"/projects | grep -v /
   
-  # the ansible script is stored in github runner path
+  # the ansible script is stored in github runner path ${{ env.GITHUB_WORKFLOW }}
   shell: ls -pr /home/runner/work/config-management/config-management/projects | grep -v /
   register: location
 
