@@ -42,7 +42,7 @@ jobs:
     - name: check before
       run: |
         echo "check"
-        ECHO ${{ env.GITHUB_WORKFLOW }}
+        echo ${{ env.GITHUB_WORKFLOW }}
         pwd ${{ env.GITHUB_WORKFLOW }}
 
     - uses: actions/checkout@v3 
