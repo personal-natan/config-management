@@ -47,6 +47,12 @@
   shell: cd "{{ target }}"/projects && python3 -m venv {{ item.split('.') | first }}
   # shell: cd "{{ target }}" && python3 -m venv {{ item.split('.') | first }}
 
+- name: check file .txt in project folder
+  shell: ls -alh "{{ target }}"/projects
+  register: checkfile
+
+- debug: var=checkfile.stdout_lines
+
 - name: install & update requirement.txt
   with_items: "{{ location.stdout_lines }}"
   shell: cd "{{ target }}"/projects && source {{ item.split('.') | first }}/bin/activate && pip install -r {{ item }}
