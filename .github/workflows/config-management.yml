@@ -36,8 +36,13 @@ jobs:
       with:
         name: venv-project-artifact
         # path: ${{ runner.temp }}
-        path: ${{ env.GITHUB_WORKFLOW }}
+        # path: ${{ env.GITHUB_WORKFLOW }}
+        path: ${{ env.dest }}
 
+    - run: |
+        echo "pull main repo"
+        ls -alh /roles/install-dep/templates
+        
     - uses: actions/checkout@v3 
       name: pull ansible repo
 
