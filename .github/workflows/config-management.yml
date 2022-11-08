@@ -25,7 +25,7 @@ jobs:
   pull_config_management:
     runs-on: 'ubuntu-20.04'
     needs: [ pull_venv_project ]
-    
+
     env:
       dest: roles/install-dep/templates/
       src: venv-project-artifact/*
@@ -35,15 +35,15 @@ jobs:
       name: Download Artifact
       with:
         name: venv-project-artifact
-        path: ${{ runner.temp }}
-        # path: ${{ env.GITHUB_WORKFLOW }}
+        # path: ${{ runner.temp }}
+        path: ${{ env.GITHUB_WORKFLOW }}
 
     - uses: actions/checkout@v3 
       name: pull ansible repo
 
     - run: |
         echo "pull main repo"
-        ls -alh
+        ls -alh /roles/install-dep/templates
   
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
