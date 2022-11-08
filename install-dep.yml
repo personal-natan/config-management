@@ -1,8 +1,13 @@
 ---
 
 - name: Configuration Management of Python venv
-  # hosts: controller
   user: root
-  hosts: other
+
+  ## this below setup is for default runner from github
+  hosts: controller
+  
+  ## this below setup is for private github runner  
+  # hosts: other
+  
   roles:
     - install-dep

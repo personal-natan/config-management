@@ -70,8 +70,9 @@ jobs:
         ## path: ${{ runner.temp }}
         path: ${{ env.GITHUB_WORKFLOW }} #/home/runner/work/config-management/config-management
     
-    - name: check ansible
-      run: ansible --version
   # run the ansible to execute the latest update  
-    # - name: Install venv's Dependencies
-    #   run: ansible-playbook install-dep.yml
+    - name: Install venv's Dependencies
+      run: ansible-playbook install-dep.yml
+
+    - name: check result
+      run: ls /home/runner/work/projectone

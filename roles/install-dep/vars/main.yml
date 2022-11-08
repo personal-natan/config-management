@@ -1,3 +1,7 @@
 ---
-target: "/home/ansible/projectone"
+## this setup is for private destination server
+#target: "/home/ansible/projectone"
+
+## this setup is for default server in github
+target: "/home/runner/work/projectone"
 path_clone: "{{ path_clone }}"

@@ -16,7 +16,13 @@
 - name: Copy file
   ansible.builtin.copy:
 # the ENV updates are stored in ${{ env.GITHUB_WORKFLOW }}, check github-workflow yaml  
-    src: /home/ansible/sample-dir/projects
+ 
+    ## this below setup is a path in private github runner
+    # src: /home/ansible/sample-dir/projects
+
+    ## this below setup is a path in default runner in github
+    src: /home/runner/work/config-management/config-management/projects
+
     remote_src: yes
     dest: "{{ target }}"
 
