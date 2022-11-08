@@ -1,34 +1,32 @@
 ---
-
 # - name: "Set variables"
 #   set_fact:
 #     path_ansible: "/home/ansible/sample-dir"
 #     path_local: "/home/natan/sample-dir"
     
-- name: clone the Requirement files
-  ansible.builtin.git:
-    repo: git@github.com:personal-natan/venv-projects.git
-    dest: sample-dir
-    # single_branch: yes
-    clone: yes
-    version: master
+# - name: clone the Requirement files
+#   ansible.builtin.git:
+#     repo: git@github.com:personal-natan/venv-projects.git
+#     dest: sample-dir
+#     # single_branch: yes
+#     clone: yes
+#     version: master
     
-- name: Copy file
-  ansible.builtin.copy:
+# - name: Copy file
+#   ansible.builtin.copy:
 # the ENV updates are stored in ${{ env.GITHUB_WORKFLOW }}, check github-workflow yaml  
  
     ## this below setup is a path in private github runner
     # src: /home/ansible/sample-dir/projects
-
-    ## this below setup is a path in default runner in github
-    src: /home/runner/work/config-management/config-management/projects
-
-    remote_src: yes
-    dest: "{{ target }}"
+    # remote_src: yes
+    # dest: "{{ target }}"
 
 # list files only
 - name: Listing Project
-  shell: ls -pr "{{ target }}"/projects | grep -v /
+  # shell: ls -pr "{{ target }}"/projects | grep -v /
+  
+  # the ansible script is stored in github runner path
+  shell: ls -pr /home/runner/work/config-management/config-management/projects | grep -v /
   register: location
 
 - name: install venv in selected project
