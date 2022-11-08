@@ -6,12 +6,34 @@ on:
   #     - 'master'
 
 jobs:
-  # Run the job only with "docs_changed" equals "True"
-  pull_venv_project:
+# Install all requirements 
+  install_ansible:
     runs-on: 'ubuntu-20.04'
     steps:
+      - uses: actions/checkout@v3
 
-# get update of VENV in another repository    
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          python3 -m pip install  ansible
+
+      - name: Check Python & Ansible Version 
+        run: |
+          python --version
+          ansible --version
+
+# Pulling ENV Project
+  pull_venv_project:
+    runs-on: 'ubuntu-20.04'
+    needs: [ install_ansible ]
+    steps:
+
+  # get update of VENV in another repository    
     - name: Checkout to venv-project
       uses: actions/checkout@v2
       with:
@@ -19,39 +41,37 @@ jobs:
         path: .github/projects/
         token: ${{ secrets.REPO_TOKEN }}
 
-# store the VENV update into artifact
+  # store the VENV update into artifact
     - uses: actions/upload-artifact@v3
       with:
         name: venv-project-artifact
         path: .github/projects/
-        
+
+# Pulling Ansible Script       
   pull_config_management:
     runs-on: 'ubuntu-20.04'
     needs: [ pull_venv_project ]
 
-# set github action env
+  # set github action env
     env:
       dest: roles/install-dep/
       src: venv-project-artifact/*
 
     steps:
-# download ansible script    
+  # download ansible script    
     - uses: actions/checkout@v3 
       name: Download Ansible script
 
-# download artifact to ansible configuration folder
+  # download artifact to ansible configuration folder
     - uses: actions/download-artifact@v3
       name: Download Artifact
       with:
         name: venv-project-artifact
         ## path: ${{ runner.temp }}
-        path: ${{ env.GITHUB_WORKFLOW }}
-
-    - name: check after
-      run: |
-        echo "after"
-        ls -alh ${{ env.GITHUB_WORKFLOW }}
-
-# run the ansible to execute the latest update  
+        path: ${{ env.GITHUB_WORKFLOW }} #/home/runner/work/config-management/config-management
+    
+    - name: check ansible
+      run: ansible --version
+  # run the ansible to execute the latest update  
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
