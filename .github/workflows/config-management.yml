@@ -10,6 +10,8 @@ jobs:
   pull_venv_project:
     runs-on: 'ubuntu-20.04'
     steps:
+
+# get update of VENV in another repository    
     - name: Checkout to venv-project
       uses: actions/checkout@v2
       with:
@@ -17,6 +19,7 @@ jobs:
         path: .github/projects/
         token: ${{ secrets.REPO_TOKEN }}
 
+# store the VENV update into artifact
     - uses: actions/upload-artifact@v3
       with:
         name: venv-project-artifact
@@ -26,32 +29,29 @@ jobs:
     runs-on: 'ubuntu-20.04'
     needs: [ pull_venv_project ]
 
+# set github action env
     env:
       dest: roles/install-dep/
       src: venv-project-artifact/*
 
     steps:
+# download ansible script    
+    - uses: actions/checkout@v3 
+      name: Download Ansible script
+
+# download artifact to ansible configuration folder
     - uses: actions/download-artifact@v3
       name: Download Artifact
       with:
         name: venv-project-artifact
-        # path: ${{ runner.temp }}
+        ## path: ${{ runner.temp }}
         path: ${{ env.GITHUB_WORKFLOW }}
-        # path: ${{ env.dest }}
-
-    - name: check before
-      run: |
-        echo "check"
-        echo ${{ env.GITHUB_WORKFLOW }}
-        pwd ${{ env.GITHUB_WORKFLOW }}
-
-    - uses: actions/checkout@v3 
-      name: pull ansible repo
 
     - name: check after
       run: |
         echo "after"
         ls -alh ${{ env.GITHUB_WORKFLOW }}
-  
+
+# run the ansible to execute the latest update  
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
