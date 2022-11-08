@@ -27,7 +27,7 @@ jobs:
     needs: [ pull_venv_project ]
 
     env:
-      dest: roles/install-dep/templates/
+      dest: roles/install-dep/
       src: venv-project-artifact/*
 
     steps:
@@ -36,19 +36,22 @@ jobs:
       with:
         name: venv-project-artifact
         # path: ${{ runner.temp }}
-        # path: ${{ env.GITHUB_WORKFLOW }}
-        path: ${{ env.dest }}
+        path: ${{ env.GITHUB_WORKFLOW }}
+        # path: ${{ env.dest }}
 
-    - run: |
-        echo "pull main repo"
-        ls -alh /roles/install-dep/templates
-        
+    - name: check before
+      run: |
+        echo "check"
+        ECHO ${{ env.GITHUB_WORKFLOW }}
+        pwd ${{ env.GITHUB_WORKFLOW }}
+
     - uses: actions/checkout@v3 
       name: pull ansible repo
 
-    - run: |
-        echo "pull main repo"
-        ls -alh /roles/install-dep/templates
+    - name: check after
+      run: |
+        echo "after"
+        ls -alh ${{ env.GITHUB_WORKFLOW }}
   
     # - name: Install venv's Dependencies
     #   run: ansible-playbook install-dep.yml
