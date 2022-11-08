@@ -30,7 +30,7 @@
 - name: create folder target if it isnt exist
   loop: "{{ path_stat.results }}"
   file:
-    path: "{{ item.item }}"
+    path: "{{ item.item }}/projects"
     state: directory
   when: "{{ not item.stat.exists }}"
   

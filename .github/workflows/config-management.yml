@@ -72,7 +72,7 @@ jobs:
     
   # run the ansible to execute the latest update  
     - name: Install venv's Dependencies
-      run: ansible-playbook install-dep.yml
+      run: ansible-playbook install-dep.yml -vv
 
     - name: check result
       run: ls /home/runner/projectone
