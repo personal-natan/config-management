@@ -7,34 +7,36 @@ on:
 
 jobs:
   # Run the job only with "docs_changed" equals "True"
-  # pull_venv_project:
-  #   runs-on: 'ubuntu-20.04'
-  #   steps:
-  #   - name: Checkout to venv-project
-  #     uses: actions/checkout@v2
-  #     with:
-  #       repository: Natannegara/venv-projects
-  #       path: .github/projects/templates
-  #       token: ${{ secrets.REPO_TOKEN }}
+  pull_venv_project:
+    runs-on: 'ubuntu-20.04'
+    steps:
+    - name: Checkout to venv-project
+      uses: actions/checkout@v2
+      with:
+        repository: Natannegara/venv-projects
+        path: .github/projects/
+        token: ${{ secrets.REPO_TOKEN }}
 
-  #   - uses: actions/upload-artifact@v3
-  #     with:
-  #       name: venv-project-artifact
-  #       path: .github/projects/
+    - uses: actions/upload-artifact@v3
+      with:
+        name: venv-project-artifact
+        path: .github/projects/
         
   pull_config_management:
     runs-on: 'ubuntu-20.04'
-    # needs: [ pull_venv_project ]
-    # env:
-    #   dest: roles/install-dep/templates/
-      # src: venv-project-artifact/*
+    needs: [ pull_venv_project ]
+    
+    env:
+      dest: roles/install-dep/templates/
+      src: venv-project-artifact/*
+
     steps:
-    # - uses: actions/download-artifact@v3
-    #   name: Download Artifact
-    #   with:
-    #     name: venv-project-artifact
-    #     path: ${{ runner.temp }}
-    #     path: ${{ env.GITHUB_WORKFLOW }}
+    - uses: actions/download-artifact@v3
+      name: Download Artifact
+      with:
+        name: venv-project-artifact
+        path: ${{ runner.temp }}
+        # path: ${{ env.GITHUB_WORKFLOW }}
 
     - uses: actions/checkout@v3 
       name: pull ansible repo
