@@ -21,6 +21,10 @@
 #     remote_src: yes
 #     dest: "{{ target }}"
 
+- name: "Set variables"
+  set_fact:
+    env_path: "/home/runner/work/config-management/config-management/projects"
+
 - name: check folder existing
   with_items: "{{ target }}"
   stat:
@@ -39,7 +43,7 @@
   # shell: ls -pr "{{ target }}"/projects | grep -v /
   
   # the ansible script is stored in github runner path ${{ env.GITHUB_WORKFLOW }}
-  shell: ls -pr /home/runner/work/config-management/config-management/projects | grep -v /
+  shell: ls -pr {{ env_path }} | grep -v /
   register: location
 
 - name: install venv in selected project
@@ -47,7 +51,7 @@
   shell: cd "{{ target }}"/projects && python3 -m venv {{ item.split('.') | first }}
 
 - name: copy all env to target
-  shell: cp {{ item }} "{{ target }}"/projects
+  shell: cp "{{ env_path }}"/{{ item }} "{{ target }}"/projects
   with_items: "{{ location.stdout_lines }}"
 
 - name: install & update requirement.txt
@@ -57,4 +61,4 @@
     executable: /bin/bash
 
 - name: remove unused folder
-  shell: rm -rf /home/ansible/sample-dir
+  shell: rm -rf {{ env_path }}
