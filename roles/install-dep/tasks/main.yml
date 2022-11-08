@@ -21,6 +21,19 @@
     # remote_src: yes
     # dest: "{{ target }}"
 
+- name: check folder existing
+  with_items: "{{ target }}"
+  stat:
+    path: "{{ item }}"
+  register: path_stat
+
+- name: create folder target if it isnt exist
+  loop: "{{ path_stat.results }}"
+  file:
+    path: "{{ item.item }}"
+    state: directory
+  when: "{{ not item.stat.exists }}"
+  
 # list files only
 - name: Listing Project
   # shell: ls -pr "{{ target }}"/projects | grep -v /
